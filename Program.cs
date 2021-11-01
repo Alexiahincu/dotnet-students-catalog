@@ -7,6 +7,7 @@ namespace dotnet_students_catalog
         static void EnterCommand()
         {
             Console.WriteLine("Enter the command 'exit' to close the program.");
+            Console.WriteLine("For more information, enter the command 'about'.");
             bool exit = false;
             string command = "";
             string readPath = "D:\\Repositories\\dotnet-students-catalog\\About.txt";
