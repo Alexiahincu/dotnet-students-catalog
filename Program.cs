@@ -39,17 +39,27 @@ namespace dotnet_students_catalog
             {
                 Console.Write("Enter a command: ");
                 command = Console.ReadLine();
-                if (string.Compare(command.ToLower(), "exit") == 0)
+                switch (command.ToLower())
                 {
-                    exit = true;
-                }
-                else if (string.Compare(command.ToLower(), "about") == 0)
-                {
-                    ShowInfo();
-                }
-                else if (string.Compare(command.ToLower(), "costi") == 0)
-                {
-                    Console.WriteLine("FORTZA!"); //I love easter eggs <3
+                    case "about":
+                    {
+                        ShowInfo();
+                        break;
+                    }
+                    case "exit":
+                    {
+                        exit=true;
+                        break;
+                    }
+                    case "costi":
+                    {
+                        Console.WriteLine("FORTZA!"); //I love Easter eggs! <3
+                        break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
                 }
             }
         }
