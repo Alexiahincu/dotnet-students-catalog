@@ -58,6 +58,19 @@ namespace dotnet_students_catalog
             {
                 Console.Write("Enter a command: ");
                 command = Console.ReadLine();
+                string[] parts = command.Split(' ');
+                switch (parts.Length)
+                {
+                    case 5 when parts[0] == "add" && parts[1] == "person":
+                        {
+                            command = parts[0] + " " + parts[1];
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
                 switch (command.ToLower())
                 {
                     case "about":
@@ -75,7 +88,22 @@ namespace dotnet_students_catalog
                             Console.WriteLine("FORTZA!"); //I love Easter eggs! <3
                             break;
                         }
+                    case "add person":
+                        {
+                            int age = 0;
+                            if (parts.Length == 5 && int.TryParse(parts[4], out age))
+                            {
+                                personList.Add(new Person(parts[2], parts[3], age));
+                                Console.WriteLine($"New person added: {parts[2]} {parts[3]}, {age}");
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
                 }
+                Array.Clear(parts, 0, parts.Length);
             }
         }
     }
