@@ -61,7 +61,12 @@ namespace dotnet_students_catalog
                 string[] parts = command.Split(' ');
                 switch (parts.Length)
                 {
-                    case 5 when parts[0] == "add" && parts[1] == "person":
+                    case 5 when parts[0].ToLower() == "add" && parts[1].ToLower() == "person":
+                        {
+                            command = parts[0] + " " + parts[1];
+                            break;
+                        }
+                    case 3 when parts[0].ToLower() == "find" && parts[1].ToLower() == "person":
                         {
                             command = parts[0] + " " + parts[1];
                             break;
@@ -95,6 +100,18 @@ namespace dotnet_students_catalog
                             {
                                 personList.Add(new Person(parts[2], parts[3], age));
                                 Console.WriteLine($"New person added: {parts[2]} {parts[3]}, {age}");
+                            }
+                            break;
+                        }
+                    case "find person":
+                        {
+                            if (parts.Length == 3)
+                            {
+                                foreach (Person someone in personList)
+                                {
+                                    if (someone.FirstName == parts[2])
+                                        someone.Greet();
+                                }
                             }
                             break;
                         }
