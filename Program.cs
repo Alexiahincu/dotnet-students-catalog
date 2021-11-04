@@ -115,6 +115,15 @@ namespace dotnet_students_catalog
                             }
                             break;
                         }
+
+                    case "list persons":
+                        {
+                            foreach (Person someone in personList)
+                            {
+                                someone.Greet();
+                            }
+                            break;
+                        }
                     default:
                         {
                             break;
