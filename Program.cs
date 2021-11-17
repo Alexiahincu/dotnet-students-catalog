@@ -24,6 +24,38 @@ namespace dotnet_students_catalog
                 Console.WriteLine($"Welcome, {FirstName} {LastName} ({Age})! :)");
             }
         }
+        static class Utility
+        {
+            static public void FindPerson(string[] parts)
+            {
+                if (parts.Length == 3 || parts.Length == 4)
+                {
+                    foreach (Person someone in personList)
+                    {
+                        if (someone.FirstName == parts[2] || someone.LastName == parts[2])
+                            someone.Greet();
+                    }
+                }
+            }
+            static public void ListPersons()
+            {
+                foreach (Person someone in personList)
+                {
+                    someone.Greet();
+                }
+            }
+            static public bool PersonCheck(string firstname, string lastname)
+            {
+                foreach (Person someone in personList)
+                {
+                    if (someone.FirstName == firstname && someone.LastName == lastname)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
         static void Main(string[] args)
         {
             StartCommandLoop();
@@ -71,6 +103,12 @@ namespace dotnet_students_catalog
                             command = parts[0] + " " + parts[1];
                             break;
                         }
+                    case 4 when parts[0].ToLower() == "find" && parts[1].ToLower() == "person":
+                        {
+                            //if someone is searched by full name
+                            command = parts[0] + " " + parts[1];
+                            break;
+                        }
                     default:
                         {
                             break;
@@ -95,33 +133,27 @@ namespace dotnet_students_catalog
                         }
                     case "add person":
                         {
-                            int age = 0;
-                            if (parts.Length == 5 && int.TryParse(parts[4], out age))
+                            if (!Utility.PersonCheck(parts[2], parts[3]))
                             {
-                                personList.Add(new Person(parts[2], parts[3], age));
-                                Console.WriteLine($"New person added: {parts[2]} {parts[3]}, {age}");
+                                int age = 0;
+                                if (parts.Length == 5 && int.TryParse(parts[4], out age))
+                                {
+                                    personList.Add(new Person(parts[2], parts[3], age));
+                                    Console.WriteLine($"New person added: {parts[2]} {parts[3]}, {age}");
+                                }
                             }
+                            else Console.WriteLine($"{parts[2]} {parts[3]} already exists.");
                             break;
                         }
                     case "find person":
                         {
-                            if (parts.Length == 3)
-                            {
-                                foreach (Person someone in personList)
-                                {
-                                    if (someone.FirstName == parts[2])
-                                        someone.Greet();
-                                }
-                            }
+                            Utility.FindPerson(parts);
                             break;
                         }
 
                     case "list persons":
                         {
-                            foreach (Person someone in personList)
-                            {
-                                someone.Greet();
-                            }
+                            Utility.ListPersons();
                             break;
                         }
                     default:
