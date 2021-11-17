@@ -1,2 +1,15 @@
 This file contains information about The Students Catalog.
 Here you can find what you are interested in. :)
+
+Here you can add new people by entering the "add people" command, followed by the full name and the age of the person you want to add.
+Example: "add person Alexia Hincu 18"
+If the person you want to add already exists, you will be informed.
+
+Use the "find person" command, followed by the name of the person you want to find in the catalog.
+Example:
+For person Alexia Hincu, 18, you can type:
+"find person Alexia"
+"find person Hincu"
+"find person Alexia Hincu"
+
+If you want to see all the people from the catalog, you can simply enter the command "list persons".
