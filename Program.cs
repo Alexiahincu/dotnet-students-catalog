@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 namespace dotnet_students_catalog
 {
     class Program
     {
         static List<Person> personList = new List<Person>();
-        static string[] fileInfo = new string[50];
-        static int rowsNumber = 0;
+        static StringBuilder fileInfo=new StringBuilder();
         static void Main(string[] args)
         {
             StartCommandLoop();
@@ -20,15 +20,7 @@ namespace dotnet_students_catalog
             StreamReader read = new StreamReader(readPath);
             while (!read.EndOfStream)
             {
-                fileInfo[rowsNumber] = read.ReadLine();
-                rowsNumber++;
-            }
-        }
-        static void ShowInfo()
-        {
-            for (int i = 0; i < rowsNumber; i++)
-            {
-                Console.WriteLine(fileInfo[i]);
+                fileInfo.AppendLine(read.ReadLine());
             }
         }
         static void StartCommandLoop()
@@ -70,7 +62,7 @@ namespace dotnet_students_catalog
                 {
                     case "about":
                         {
-                            ShowInfo();
+                            Console.WriteLine(fileInfo);
                             break;
                         }
                     case "exit":
