@@ -6,56 +6,8 @@ namespace dotnet_students_catalog
     class Program
     {
         static List<Person> personList = new List<Person>();
-        static string[] fileInfo = new string[5];
+        static string[] fileInfo = new string[50];
         static int rowsNumber = 0;
-
-        class Person
-        {
-            public string FirstName, LastName;
-            public int Age;
-            public Person(string firstname, string lastname, int age)
-            {
-                FirstName = firstname;
-                LastName = lastname;
-                Age = age;
-            }
-            public void Greet()
-            {
-                Console.WriteLine($"Welcome, {FirstName} {LastName} ({Age})! :)");
-            }
-        }
-        static class Utility
-        {
-            static public void FindPerson(string[] parts)
-            {
-                if (parts.Length == 3 || parts.Length == 4)
-                {
-                    foreach (Person someone in personList)
-                    {
-                        if (someone.FirstName == parts[2] || someone.LastName == parts[2])
-                            someone.Greet();
-                    }
-                }
-            }
-            static public void ListPersons()
-            {
-                foreach (Person someone in personList)
-                {
-                    someone.Greet();
-                }
-            }
-            static public bool PersonCheck(string firstname, string lastname)
-            {
-                foreach (Person someone in personList)
-                {
-                    if (someone.FirstName == firstname && someone.LastName == lastname)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
         static void Main(string[] args)
         {
             StartCommandLoop();
@@ -133,7 +85,7 @@ namespace dotnet_students_catalog
                         }
                     case "add person":
                         {
-                            if (!Utility.PersonCheck(parts[2], parts[3]))
+                            if (!Utility.PersonCheck(parts[2], parts[3], personList))
                             {
                                 int age = 0;
                                 if (parts.Length == 5 && int.TryParse(parts[4], out age))
@@ -147,13 +99,13 @@ namespace dotnet_students_catalog
                         }
                     case "find person":
                         {
-                            Utility.FindPerson(parts);
+                            Utility.FindPerson(parts, personList);
                             break;
                         }
 
                     case "list persons":
                         {
-                            Utility.ListPersons();
+                            Utility.ListPersons(personList);
                             break;
                         }
                     default:
