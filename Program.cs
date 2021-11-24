@@ -77,7 +77,7 @@ namespace dotnet_students_catalog
                         }
                     case "add person":
                         {
-                            if (!Utility.PersonCheck(parts[2], parts[3], personList))
+                            if (!PersonHelper.PersonCheck(parts[2], parts[3], personList))
                             {
                                 int age = 0;
                                 if (parts.Length == 5 && int.TryParse(parts[4], out age))
@@ -91,13 +91,13 @@ namespace dotnet_students_catalog
                         }
                     case "find person":
                         {
-                            Utility.FindPerson(parts, personList);
+                            PersonHelper.FindPerson(parts, personList);
                             break;
                         }
 
                     case "list persons":
                         {
-                            Utility.ListPersons(personList);
+                            PersonHelper.ListPersons(personList);
                             break;
                         }
                     default:
