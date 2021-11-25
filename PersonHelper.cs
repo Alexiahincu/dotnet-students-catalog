@@ -22,27 +22,17 @@ namespace dotnet_students_catalog
         public static void FindPerson(string nameToSearch, List<Person> personList)
         {
             bool found = false;
+            string[] nameParts = new string[2];
             if (nameToSearch.Contains(" "))
             {
-                string[] nameParts = nameToSearch.Split(' ');
-                foreach (Person someone in personList)
-                {
-                    if (someone.FirstName == nameParts[0] && someone.LastName == nameParts[1])
-                    {
-                        found = true;
-                        someone.Greet();
-                    }
-                }
+                nameParts = nameToSearch.Split(' ');
             }
-            else
+            foreach (Person someone in personList)
             {
-                foreach (Person someone in personList)
+                if ((someone.FirstName == nameParts[0] && someone.LastName == nameParts[1]) || (someone.FirstName == nameToSearch || someone.LastName == nameToSearch))
                 {
-                    if (someone.FirstName == nameToSearch || someone.LastName == nameToSearch)
-                    {
-                        found = true;
-                        someone.Greet();
-                    }
+                    found = true;
+                    someone.Greet();
                 }
             }
             if (!found)
